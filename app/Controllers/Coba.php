@@ -11,7 +11,7 @@ class Coba extends BaseController
 
 public function coba()
 {
-    echo "Hello AriefDM";
+    echo "Hello Arief Dwi Muhidin";
 }
 
 }
