@@ -17,9 +17,29 @@ class Pages extends BaseController
         $data = [
             'title' => 'About | Web ADM'
         ];
-        echo view('pages/about' , $data);
+        return view('pages/about' , $data);
     }
     
+    public function contact()
+    {
+        $data = [
+            'title' => 'Kontak | Web ADM',
+            'alamat' => [
+                [
+                    'tipe' => 'rumah',
+                    'alamat' => 'jln abc no 123',
+                    'kota' => 'Bandung'
+                ],
+                [
+                    'tipe' => 'kantor',
+                    'alamat' => 'jln setiabudhi no 123',
+                    'kota' => 'Jakarta'
+                ]
+            ]
+        ];
+
+        return view('pages/contact', $data);
+    }
 
 
 }
