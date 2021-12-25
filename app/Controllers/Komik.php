@@ -22,9 +22,11 @@ class Komik extends BaseController
         ];
 
         // $komikModel = new \App\Models\KomikModel();
-    
-        
 
         return view('komik/index', $data);
+    }
+
+    public function detail($slug){
+        echo $slug;
     }
 }
