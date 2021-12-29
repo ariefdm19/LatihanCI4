@@ -5,6 +5,7 @@
     <div class="row">
         <div class="col-8">
             <h2 class="my-3">Form Tambah Data Komik</h2>
+            <?= $validation->listErrors(); ?>
             <form action="/komik/save" method="post">
             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
   <div class="form-group row">
