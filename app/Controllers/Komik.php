@@ -99,4 +99,43 @@ class Komik extends BaseController
         return view('komik/edit', $data);
     }
 
+    public function update($id)
+    {
+        // cek judul
+        $komikLama = $this->komikModel->getKomik($this->request->getVar('slug'));
+        if($komikLama['judul'] == $this->request->getVar('judul')) {
+        $rule_judul = 'required';
+    } else {
+        $rule_judul = 'required|is_unique[komik.judul]';
+    }
+        if(!$this->validate([
+            'judul' => [
+                'rules' => $rule_judul,
+                'errors' => [
+                    'required' => '{field} komik harus di isi',
+                    'is_unique' => '{field} komik tidak boleh sama'
+                ]
+            ]
+          
+        ])) {
+            $validation = \Config\Services::validation();
+
+            return redirect()->to('/komik/edit/' . $this->request->getVar('slug'))->withInput()->with('validation', $validation);
+        }
+
+        $slug = url_title($this->request->getVar('judul'), '-', true);
+        $this->komikModel->save([
+            'id' => $id,
+            'judul' => $this->request->getVar('judul'),
+            'slug' => $slug,
+            'penulis' => $this->request->getVar('penulis'),
+            'penerbit' => $this->request->getVar('penerbit'),
+            'sampul' => $this->request->getVar('sampul')
+        ]);
+
+        session()->setFlashdata('pesan', 'Data Berhasil di Ubah.');
+
+        return redirect()->to('/komik');
+    }
+
 }   
