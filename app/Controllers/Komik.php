@@ -60,12 +60,14 @@ class Komik extends BaseController
                     'required' => '{field} komik harus di isi',
                     'is_unique' => '{field} komik tidak boleh sama'
                 ]
-            ]
+            ],
+            'sampul' => 'uploaded[sampul]'
 
         ])) {
-            $validation = \Config\Services::validation();
+            // $validation = \Config\Services::validation();
 
-            return redirect()->to('/komik/create')->withInput()->with('validation', $validation);
+            // return redirect()->to('/komik/create')->withInput()->with('validation', $validation);
+            return redirect()->to('/komik/create')->withInput();
         }
 
 
