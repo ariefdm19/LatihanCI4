@@ -61,7 +61,15 @@ class Komik extends BaseController
                     'is_unique' => '{field} komik tidak boleh sama'
                 ]
             ],
-            'sampul' => 'uploaded[sampul]'
+            'sampul' => [
+                'rules' => 'uploaded[sampul]|max_size[sampul,1024]|is_image[sampul]|mime_in[sampul,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'uploaded' => 'Pilih Gambar Sampul Terlebih Dahulu',
+                    'max_size' => 'Ukuran gambar Terlalu Besar',
+                    'is_image' => 'yang anda pilih bukan gambar',
+                    'mime_in' => 'yang anda pilih bukan gambar'
+                ]
+            ]
 
         ])) {
             // $validation = \Config\Services::validation();
@@ -70,6 +78,13 @@ class Komik extends BaseController
             return redirect()->to('/komik/create')->withInput();
         }
 
+        //ambil gambar
+        $fileSampul = $this->request->getFile('sampul');
+        //pindahkan file ke folder img
+        $fileSampul->move('img');
+        // ambil nama file
+        $namaSampul = $fileSampul->getName();
+
 
         $slug = url_title($this->request->getVar('judul'), '-', true);
         $this->komikModel->save([
@@ -77,7 +92,7 @@ class Komik extends BaseController
             'slug' => $slug,
             'penulis' => $this->request->getVar('penulis'),
             'penerbit' => $this->request->getVar('penerbit'),
-            'sampul' => $this->request->getVar('sampul')
+            'sampul' => $namaSampul
         ]);
 
         session()->setFlashdata('pesan', 'Data Berhasil di Tambahkan.');
