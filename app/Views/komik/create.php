@@ -32,7 +32,10 @@
         <div class="form-group row">
           <label for="sampul" class="col-sm-2 col-form-label">Sampul</label>
           <div class="col-sm-10">
-            <input type="file" class="form-control" id="sampul" name="sampul" value="<?= old('sampul'); ?>">
+            <input type="file" class="form-control <?= ($validation->hasError('sampul')) ? 'is-invalid' : ''; ?>" id="sampul" name="sampul" autofocus value="<?= old('sampul'); ?>" id="sampul" name="sampul" value="<?= old('sampul'); ?>">
+            <div id="validationServer03Feedback" class="invalid-feedback">
+              <?= $validation->getError('sampul'); ?>
+            </div>
           </div>
         </div>
 
