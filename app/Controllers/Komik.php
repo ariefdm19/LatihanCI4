@@ -26,24 +26,26 @@ class Komik extends BaseController
         return view('komik/index', $data);
     }
 
-    public function detail($slug){
+    public function detail($slug)
+    {
         $data = [
             'title' => 'Detail komik',
             'komik' => $this->komikModel->getKomik($slug)
         ];
 
         //jika komik tidak ada di tabel
-        if(empty($data['komik'])) {
+        if (empty($data['komik'])) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Judul komik' . $slug . 'Tidak di temukan');
         }
         return view('komik/detail', $data);
     }
 
-    public function create(){
-        
+    public function create()
+    {
+
         $data = [
             'title' => 'Form Tambah Data Komik',
-           'validation' => \Config\Services::validation()
+            'validation' => \Config\Services::validation()
         ];
         return view('komik/create', $data);
     }
@@ -51,7 +53,7 @@ class Komik extends BaseController
     public function save()
     {
         // validasi input
-        if(!$this->validate([
+        if (!$this->validate([
             'judul' => [
                 'rules' => 'required|is_unique[komik.judul]',
                 'errors' => [
@@ -59,7 +61,7 @@ class Komik extends BaseController
                     'is_unique' => '{field} komik tidak boleh sama'
                 ]
             ]
-          
+
         ])) {
             $validation = \Config\Services::validation();
 
@@ -92,9 +94,9 @@ class Komik extends BaseController
     public function edit($slug)
     {
         $data = [
-           'title' => 'Form Ubah Data Komik',
-           'validation' => \Config\Services::validation(),
-           'komik' => $this->komikModel->getKomik($slug) 
+            'title' => 'Form Ubah Data Komik',
+            'validation' => \Config\Services::validation(),
+            'komik' => $this->komikModel->getKomik($slug)
         ];
         return view('komik/edit', $data);
     }
@@ -103,12 +105,12 @@ class Komik extends BaseController
     {
         // cek judul
         $komikLama = $this->komikModel->getKomik($this->request->getVar('slug'));
-        if($komikLama['judul'] == $this->request->getVar('judul')) {
-        $rule_judul = 'required';
-    } else {
-        $rule_judul = 'required|is_unique[komik.judul]';
-    }
-        if(!$this->validate([
+        if ($komikLama['judul'] == $this->request->getVar('judul')) {
+            $rule_judul = 'required';
+        } else {
+            $rule_judul = 'required|is_unique[komik.judul]';
+        }
+        if (!$this->validate([
             'judul' => [
                 'rules' => $rule_judul,
                 'errors' => [
@@ -116,7 +118,7 @@ class Komik extends BaseController
                     'is_unique' => '{field} komik tidak boleh sama'
                 ]
             ]
-          
+
         ])) {
             $validation = \Config\Services::validation();
 
@@ -137,5 +139,4 @@ class Komik extends BaseController
 
         return redirect()->to('/komik');
     }
-
-}   
+}
