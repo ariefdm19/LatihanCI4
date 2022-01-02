@@ -9,9 +9,8 @@ class Home extends BaseController
         return view('welcome_message');
     }
 
-public function coba()
-{
-    echo "Hello AriefDM";
-}
-
+    public function coba()
+    {
+        echo "Ini adalah Halaman Home";
+    }
 }

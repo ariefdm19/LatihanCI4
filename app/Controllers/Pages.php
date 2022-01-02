@@ -7,7 +7,7 @@ class Pages extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Home | Web ADM'
+            'title' => 'Home | Web Komik'
         ];
         return view('pages/home', $data);
     }
@@ -15,31 +15,24 @@ class Pages extends BaseController
     public function about()
     {
         $data = [
-            'title' => 'About | Web ADM'
+            'title' => 'About | Web Komik'
         ];
-        return view('pages/about' , $data);
+        return view('pages/about', $data);
     }
-    
+
     public function contact()
     {
         $data = [
-            'title' => 'Kontak | Web ADM',
+            'title' => 'Kontak | Web Komik',
             'alamat' => [
                 [
-                    'tipe' => 'rumah',
-                    'alamat' => 'jln abc no 123',
+                    'tipe' => 'Kantor',
+                    'alamat' => 'jl. Bandung',
                     'kota' => 'Bandung'
-                ],
-                [
-                    'tipe' => 'kantor',
-                    'alamat' => 'jln setiabudhi no 123',
-                    'kota' => 'Jakarta'
                 ]
             ]
         ];
 
         return view('pages/contact', $data);
     }
-
-
 }
