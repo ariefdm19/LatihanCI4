@@ -46,7 +46,7 @@
 
     <div class="form-group row">
       <div class="col-sm-10">
-        <button type="submit" class="btn btn-primary">Ubah Data</button>
+        <button type="submit" class="btn btn-primary">Ubah Data Komik</button>
       </div>
     </div>
     </form>
