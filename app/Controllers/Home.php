@@ -11,6 +11,6 @@ class Home extends BaseController
 
     public function coba()
     {
-        echo "Ini adalah Halaman Home";
+        echo "Ini adalah Halaman Home pada aplikasi data komik";
     }
 }
